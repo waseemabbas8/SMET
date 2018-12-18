@@ -12,9 +12,7 @@
     <link rel="stylesheet" type="text/css" href="~/Theme/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="~/Theme/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="~/Theme/plugins/OwlCarousel2-2.2.1/animate.css">
-    <link rel="stylesheet" type="text/css" href="~/Theme/styles/main_styles.css">
-    <link rel="stylesheet" type="text/css" href="~/Theme/styles/responsive.css">
-
+    @RenderSection("Styles")
 </head>
 <body>
     <div class="super_container">
@@ -40,7 +38,7 @@
                                         </li>
                                     </ul>
                                     <div class="top_bar_login ml-auto">
-                                        <div class="login_button"><a href="#">Register or Login</a></div>
+                                        <div class="login_button"><a asp-controller="Account" asp-action="RegisterOrLogin">Register or Login</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +129,7 @@
         <hr />
         <!-- Footer -->
         <footer class="footer">
-            <div class="footer_background" style="background-image:url(Theme/images/footer_background.png)"></div>
+            <div class="footer_background" style="background-image:url(/Theme/images/footer_background.png)"></div>
             <div class="container">
                 <div class="row footer_row">
                     <div class="col">
@@ -252,7 +250,6 @@
     <script src="~/Theme/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
     <script src="~/Theme/plugins/easing/easing.js"></script>
     <script src="~/Theme/plugins/parallax-js-master/parallax.min.js"></script>
-    <script src="~/Theme/js/custom.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

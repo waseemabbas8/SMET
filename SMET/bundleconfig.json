@@ -1,14 +1,26 @@
 [
   {
-    "outputFileName": "wwwroot/js/login.min.js",
+    "outputFileName": "wwwroot/Theme/styles/about.min.css",
     "inputFiles": [
-      "wwwroot/js/login.js"
+      "wwwroot/Theme/styles/about.css"
     ]
   },
   {
-    "outputFileName": "wwwroot/css/login.min.css",
+    "outputFileName": "wwwroot/Theme/styles/about_responsive.min.css",
     "inputFiles": [
-      "wwwroot/css/login.css"
+      "wwwroot/Theme/styles/about_responsive.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Theme/js/about.min.js",
+    "inputFiles": [
+      "wwwroot/Theme/js/about.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Theme/plugins/colorbox/colorbox.min.css",
+    "inputFiles": [
+      "wwwroot/Theme/plugins/colorbox/colorbox.css"
     ]
   }
 ]

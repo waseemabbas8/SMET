@@ -42,9 +42,6 @@ body {
 }
 .form-module .toggle {
   cursor: pointer;
-  position: absolute;
-  top: -0;
-  right: -0;
   background: #33b5e5;
   width: 30px;
   height: 30px;
@@ -55,8 +52,8 @@ body {
   text-align: center;
 }
 .form-module .toggle .tooltip {
-  position: absolute;
   top: 5px;
+  position: absolute;
   right: -65px;
   display: block;
   background: rgba(0, 0, 0, 0.6);
@@ -65,6 +62,7 @@ body {
   font-size: 10px;
   line-height: 1;
   text-transform: uppercase;
+  opacity:1;
 }
 .form-module .toggle .tooltip:before {
   content: '';
@@ -126,6 +124,14 @@ body {
   font-size: 12px;
   text-align: center;
 }
+
+.form-module .cta .toggle{
+  background: #f2f2f2;
+  color: #666666;
+  font-size: 12px;
+  text-align: center;
+}
+
 .form-module .cta a {
   color: #333333;
   text-decoration: none;
