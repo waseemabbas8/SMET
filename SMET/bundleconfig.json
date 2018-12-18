@@ -22,5 +22,29 @@
     "inputFiles": [
       "wwwroot/Theme/plugins/colorbox/colorbox.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/Theme/plugins/easing/easing.min.js",
+    "inputFiles": [
+      "wwwroot/Theme/plugins/easing/easing.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Theme/styles/contact.min.css",
+    "inputFiles": [
+      "wwwroot/Theme/styles/contact.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Theme/styles/contact_responsive.min.css",
+    "inputFiles": [
+      "wwwroot/Theme/styles/contact_responsive.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Theme/js/contact.min.js",
+    "inputFiles": [
+      "wwwroot/Theme/js/contact.js"
+    ]
   }
 ]

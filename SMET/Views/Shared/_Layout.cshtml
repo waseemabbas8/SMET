@@ -54,18 +54,18 @@
                         <div class="col">
                             <div class="header_content d-flex flex-row align-items-center justify-content-start">
                                 <div class="logo_container">
-                                    <a href="#">
+                                    <a asp-controller="Home" asp-action="Index">
                                         <div class="logo_text">SME<span>T</span></div>
                                     </a>
                                 </div>
                                 <nav class="main_nav_contaner ml-auto">
                                     <ul class="main_nav">
-                                        <li class="active"><a href="#">Home</a></li>
-                                        <li><a href="about.html">About</a></li>
+                                        <li class="active"><a asp-action="Index">Home</a></li>
+                                        <li><a asp-controller="Home" asp-action="About">About</a></li>
                                         <li><a href="courses.html">Courses</a></li>
                                         <li><a href="blog.html">Blog</a></li>
                                         <li><a href="#">Page</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a asp-action="Contact">Contact</a></li>
                                     </ul>
                                     <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
 
@@ -248,7 +248,7 @@
     <script src="~/Theme/plugins/greensock/animation.gsap.min.js"></script>
     <script src="~/Theme/plugins/greensock/ScrollToPlugin.min.js"></script>
     <script src="~/Theme/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="~/Theme/plugins/easing/easing.js"></script>
+    <script src="~/Theme/plugins/easing/easing.min.js"></script>
     <script src="~/Theme/plugins/parallax-js-master/parallax.min.js"></script>
 
     @RenderSection("Scripts", required: false)
