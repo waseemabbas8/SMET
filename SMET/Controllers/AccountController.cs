@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using SMET.Helpers;
 using SMET.Models;
 using SMET.Models.AccountViewModels;
 
@@ -31,9 +32,16 @@ namespace SMET.Controllers
         {
             return View("RegisterOr");
         }
-
+        
         public IActionResult RegisterOrLogin()
         {
+            var model = TempData.Get<RegisterViewModel>("user");
+            if ( model != null)
+            {
+                var result = TempData.Get<IdentityResult>("ModelState");
+                AddErrors(result);
+                return View(model);
+            }
             return View();
         }
 
@@ -43,10 +51,11 @@ namespace SMET.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             //ViewData["ReturnUrl"] = returnUrl;
+            IdentityResult result = null;
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await userManager.CreateAsync(user, model.Password);
+                result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -57,11 +66,13 @@ namespace SMET.Controllers
                     //_logger.LogInformation("User created a new account with password.");
                     return RedirectToAction(nameof(AccountController.Index));
                 }
-                AddErrors(result);
+                //AddErrors(result);
             }
-
+            
+            TempData.Put("user", model);
+            TempData.Put("ModelState", result);
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return RedirectToAction(nameof(AccountController.RegisterOrLogin));
         }
 
         private void AddErrors(IdentityResult result)

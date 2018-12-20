@@ -39,6 +39,8 @@
         <div class="pen-title">
             <h1>Society of Modern Engineering & Science</h1>
         </div>
+        <!-- Validation Summary-->
+        <div asp-validation-summary="All" class="text-danger"></div>
         <!-- Form Module-->
         <div class="module form-module">
             <div class="toggle">
@@ -56,10 +58,10 @@
                 <h2>Create an account</h2>
                 @Html.AntiForgeryToken()
                 <form asp-controller="Account" asp-action="Register" method="post">
-                    <input  asp-for="Email" placeholder="Email" />
-                    <input  asp-for="Phone" placeholder="Phone" />
-                    <input  asp-for="Password" placeholder="Password" />
-                    <input  asp-for="ConfirmPassword" placeholder="Confirm Password" />
+                    <input type="email" asp-for="Email" placeholder="Email" required /> <span asp-validation-for="Email"></span>
+                    <input type="text" asp-for="Phone" placeholder="Phone" required />
+                    <input type="password" asp-for="Password" placeholder="Password" required />
+                    <input type="password" asp-for="ConfirmPassword" placeholder="Confirm Password" />
                     <button>Register</button>
                 </form>
             </div>
@@ -70,7 +72,8 @@
 
 
 @section Scripts{
-
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Theme/js/course.js"></script>
     <script src="~/js/login.js"></script>
 }

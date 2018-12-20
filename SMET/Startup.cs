@@ -44,7 +44,10 @@ namespace SMET
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            // Add application services.
+            // Add application services .
+            //temdata for session
+            services.AddMemoryCache();
+            services.AddSession();
             //services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -69,7 +72,7 @@ namespace SMET
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
