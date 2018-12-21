@@ -38,7 +38,7 @@
                                         </li>
                                     </ul>
                                     <div class="top_bar_login ml-auto">
-                                        <div class="login_button"><a asp-controller="Account" asp-action="RegisterOrLogin">Register or Login</a></div>
+                                        @await Html.PartialAsync("_LoginPartial")
                                     </div>
                                 </div>
                             </div>

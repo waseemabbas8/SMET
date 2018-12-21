@@ -64,7 +64,7 @@ namespace SMET.Controllers
                 if (result.Succeeded)
                 {
                     //_logger.LogInformation("User logged in.");
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(UserProfile));
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -101,7 +101,7 @@ namespace SMET.Controllers
 
                     await signInManager.SignInAsync(user, isPersistent: false);
                     //_logger.LogInformation("User created a new account with password.");
-                    return RedirectToAction(nameof(AccountController.Index));
+                    return RedirectToAction(nameof(UserProfile));
                 }
                 //AddErrors(result);
             }
@@ -110,6 +110,11 @@ namespace SMET.Controllers
             TempData.Put("ModelState", result);
             // If we got this far, something failed, redisplay form
             return RedirectToAction(nameof(RegisterOrLogin));
+        }
+
+        public IActionResult UserProfile()
+        {
+            return View();
         }
 
         private void AddErrors(IdentityResult result)
