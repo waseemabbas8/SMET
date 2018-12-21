@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model RegisterViewModel
+@model LoginOrRegisterViewModel
 
 @section Styles{
 
@@ -48,9 +48,10 @@
             </div>
             <div class="form">
                 <h2>Login to your account</h2>
+                @Html.AntiForgeryToken()
                 <form asp-controller="Account" asp-action="Login" method="post">
-                    <input type="text" placeholder="Username" />
-                    <input type="password" placeholder="Password" />
+                    <input type="email" asp-for="LoginViewModel.Email" placeholder="Username" />
+                    <input type="password" asp-for="LoginViewModel.Password" placeholder="Password" />
                     <button>Login</button>
                 </form>
             </div>
@@ -58,10 +59,10 @@
                 <h2>Create an account</h2>
                 @Html.AntiForgeryToken()
                 <form asp-controller="Account" asp-action="Register" method="post">
-                    <input type="email" asp-for="Email" placeholder="Email" required /> <span asp-validation-for="Email"></span>
-                    <input type="text" asp-for="Phone" placeholder="Phone" required />
-                    <input type="password" asp-for="Password" placeholder="Password" required />
-                    <input type="password" asp-for="ConfirmPassword" placeholder="Confirm Password" />
+                    <input type="email" asp-for="RegisterViewModel.Email" placeholder="Email" required />
+                    <input type="text" asp-for="RegisterViewModel.Phone" placeholder="Phone" required />
+                    <input type="password" asp-for="RegisterViewModel.Password" placeholder="Password" required />
+                    <input type="password" asp-for="RegisterViewModel.ConfirmPassword" placeholder="Confirm Password" />
                     <button>Register</button>
                 </form>
             </div>

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using SMET.Helpers;
 using SMET.Models;
 using SMET.Models.AccountViewModels;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace SMET.Controllers
 {
@@ -27,19 +28,22 @@ namespace SMET.Controllers
         {
             return View();
         }
-
-        public IActionResult Login()
-        {
-            return View("RegisterOr");
-        }
         
         public IActionResult RegisterOrLogin()
         {
-            var model = TempData.Get<RegisterViewModel>("user");
+            var model = TempData.Get<LoginOrRegisterViewModel>("user");
             if ( model != null)
             {
                 var result = TempData.Get<IdentityResult>("ModelState");
-                AddErrors(result);
+                if (result == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt...");
+                }
+                else
+                {
+                    AddErrors(result);
+                }
+                
                 return View(model);
             }
             return View();
@@ -48,12 +52,45 @@ namespace SMET.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Login(LoginOrRegisterViewModel lr)
+        {
+            if (ModelState.IsValid)
+            {
+                LoginViewModel model = lr.LoginViewModel;
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    //_logger.LogInformation("User logged in.");
+                    return RedirectToAction(nameof(Index));
+                }
+                if (result.RequiresTwoFactor)
+                {
+                   // return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+                }
+                if (result.IsLockedOut)
+                {
+                    //_logger.LogWarning("User account locked out.");
+                    // return RedirectToAction(nameof(Lockout));
+                }
+            }
+
+            TempData.Put("user", lr);
+            return RedirectToAction(nameof(RegisterOrLogin));
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(LoginOrRegisterViewModel lr)
         {
             //ViewData["ReturnUrl"] = returnUrl;
             IdentityResult result = null;
             if (ModelState.IsValid)
             {
+                RegisterViewModel model = lr.RegisterViewModel;
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -69,17 +106,20 @@ namespace SMET.Controllers
                 //AddErrors(result);
             }
             
-            TempData.Put("user", model);
+            TempData.Put("user", lr);
             TempData.Put("ModelState", result);
             // If we got this far, something failed, redisplay form
-            return RedirectToAction(nameof(AccountController.RegisterOrLogin));
+            return RedirectToAction(nameof(RegisterOrLogin));
         }
 
         private void AddErrors(IdentityResult result)
         {
-            foreach (var error in result.Errors)
+            if (result !=null)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
         }
 

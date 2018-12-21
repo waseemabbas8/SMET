@@ -27,5 +27,6 @@ namespace SMET.Models.AccountViewModels
         [Required]
         [Display(Name = "Phone")]
         public string Phone { get; set; }
+        
     }
 }
