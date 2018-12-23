@@ -46,5 +46,11 @@
     "inputFiles": [
       "wwwroot/Theme/js/contact.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/jquery-editable/jquery.jeditable.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery-editable/jquery.jeditable.js"
+    ]
   }
 ]

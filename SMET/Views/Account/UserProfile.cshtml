@@ -10,11 +10,63 @@
     <link href="~/Theme/styles/about_responsive.min.css" rel="stylesheet" />
 }
 
+<!-- Home -->
+<div class="home">
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li>Profile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="container">
 
+    <div class="row team_row">
+
+        <!-- Team Item -->
+        <div class="col-lg-3 col-md-6 team_col">
+            <div class="team_item">
+                <div class="team_image"><img src="~/Theme/images/team_1.jpg" alt=""></div>
+                <div class="team_body">
+                    <div class="team_title"><a class="edit" href="#">Jacke Masito</a></div>
+                    <div class="team_subtitle">Marketing & Management</div>
+                    <div class="social_list">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                <button type="submit" class="counter_form_button">Log Out</button>
+            </form>
+            
+        </div>
+
+    </div>
+</div>
 
 @section Scripts{
     <script src="~/Theme/plugins/colorbox/jquery.colorbox-min.js"></script>
     <script src="~/Theme/js/about.min.js"></script>
+
+    <script src="~/lib/jquery-editable/jquery.jeditable.js"></script>
+
+    <script>
+        $(function () {
+            $('.edit').editable('');
+        })
+    </script>
 }
 

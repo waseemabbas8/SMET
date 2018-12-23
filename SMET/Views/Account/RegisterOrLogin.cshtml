@@ -63,6 +63,9 @@
                     <input type="text" asp-for="RegisterViewModel.Phone" placeholder="Phone" required />
                     <input type="password" asp-for="RegisterViewModel.Password" placeholder="Password" required />
                     <input type="password" asp-for="RegisterViewModel.ConfirmPassword" placeholder="Confirm Password" />
+                    <select asp-for="RegisterViewModel.Role">
+                        <option>Student</option>
+                    </select>
                     <button>Register</button>
                 </form>
             </div>

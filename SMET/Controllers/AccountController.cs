@@ -82,6 +82,15 @@ namespace SMET.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            //_logger.LogInformation("User logged out.");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(LoginOrRegisterViewModel lr)
@@ -95,6 +104,9 @@ namespace SMET.Controllers
                 result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //asign a role 
+                    await userManager.AddToRoleAsync(user, model.Role);
+
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
                     //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     //await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
