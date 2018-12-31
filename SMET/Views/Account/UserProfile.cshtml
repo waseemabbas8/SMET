@@ -1,4 +1,4 @@
-﻿
+﻿@model ApplicationUser
 @{
     ViewData["Title"] = "UserProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -31,14 +31,14 @@
 <div class="container">
 
     <div class="row team_row">
-
+        <div id="user-id" style="display:none;">@Model.Id</div>
         <!-- Team Item -->
         <div class="col-lg-3 col-md-6 team_col">
             <div class="team_item">
                 <div class="team_image"><img src="~/Theme/images/team_1.jpg" alt=""></div>
                 <div class="team_body">
-                    <div class="team_title"><a class="edit" href="#">Jacke Masito</a></div>
-                    <div class="team_subtitle">Marketing & Management</div>
+                    <div class="team_title"><a class="edit" id="name" href="#">Jacke Masito</a></div>
+                    <div class="team_subtitle"><i class="fa fa-graduation-cap" aria-hidden="true"></i> @ViewBag.Role</div>
                     <div class="social_list">
                         <ul>
                             <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -54,6 +54,25 @@
             
         </div>
 
+        <div class="col-lg-9 col-md-6 team_col">
+            <div class="row" style="height: 46px; background: #14bdee; align-items: center !important">
+                <div class="col-md-4" style="color: white;">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i> @Model.UserName
+                </div>
+                <div class="col-md-4" style="color: white; text-align: center">
+                    <i class="fa fa-phone" aria-hidden="true"></i> @Model.PhoneNumber
+                </div>
+                <div class="col-md-4" style="color: white; text-align: right">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i> Sangla Hill
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <strong><i class="fa fa-map-signs" aria-hidden="true"></i> Street Address | </strong>
+                Mohallah Faizabad Street No.2
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -66,6 +85,26 @@
     <script>
         $(function () {
             $('.edit').editable('');
+        })
+
+        $(function () {
+            var StudentId = $('#user-id').html()
+            $.ajax({
+                url: "/Account/GetStudent",
+                type: "POST",
+                data: {
+                    Id: StudentId
+                },
+                complete: function (result) {
+                    if (result != null) {
+                        alert(result);
+
+                    } else {
+                        alert("Error! could not delte student");
+                    }
+                }
+
+            });
         })
     </script>
 }

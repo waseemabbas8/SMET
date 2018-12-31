@@ -15,5 +15,7 @@ namespace SMET.Data
             : base(options)
         {
         }
+
+        public virtual DbSet<Student> Student { get; set; }
     }
 }

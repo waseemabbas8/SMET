@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using SMET.Data;
 using SMET.Helpers;
 using SMET.Models;
 using SMET.Models.AccountViewModels;
@@ -17,16 +18,13 @@ namespace SMET.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ApplicationDbContext db;
 
-        public AccountController(UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager)
+        public AccountController(UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager, ApplicationDbContext _db)
         {
             userManager = _userManager;
             signInManager = _signInManager;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
+            db = _db;
         }
         
         public IActionResult RegisterOrLogin()
@@ -100,7 +98,7 @@ namespace SMET.Controllers
             if (ModelState.IsValid)
             {
                 RegisterViewModel model = lr.RegisterViewModel;
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.Phone };
                 result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -124,9 +122,36 @@ namespace SMET.Controllers
             return RedirectToAction(nameof(RegisterOrLogin));
         }
 
-        public IActionResult UserProfile()
+        [Authorize]
+        public async Task<IActionResult> UserProfile()
         {
-            return View();
+            ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
+            IList<String> roles = await userManager.GetRolesAsync(user);
+            ViewBag.Role = roles[0];
+            return View(user);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public Student GetStudent(string userId)
+        {            
+            return db.Student.Where(m => m.UserId.Equals(userId)).FirstOrDefault();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateStudentProfile(Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                student.CreatedDate = DateTime.Now;
+                await db.Student.AddAsync(student);
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(UserProfile));
+            }
+
+            return View(student);
         }
 
         private void AddErrors(IdentityResult result)

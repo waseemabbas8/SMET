@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SMET.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using System.Data.SqlClient;
+using SMET.Helpers;
 
 namespace SMET
 {
@@ -38,8 +40,9 @@ namespace SMET
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -82,6 +85,7 @@ namespace SMET
             });
 
             CreateUserRoles(serviceProvider).Wait();
+            
         }
 
         // In this method we will create default User roles and Admin user for login  
