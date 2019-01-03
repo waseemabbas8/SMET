@@ -1,0 +1,77 @@
+﻿@model PostCategory
+@using SMET.Helpers
+
+@{
+    ViewData["Title"] = "ManagePostCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Theme/styles/contact.min.css" rel="stylesheet" />
+    <link href="~/Theme/styles/contact_responsive.min.css" rel="stylesheet" />
+}
+
+<!-- Home -->
+<div class="home">
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a asp-controller="Post" asp-action="Dashboard">Admin</a></li>
+                            <li>Post Category</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact">
+
+    <!-- Contact Info -->
+    <div class="contact_info_container">
+        <div class="container">
+            <div class="row">
+
+                <!-- Category Form -->
+                <div class="col-lg-6">
+                    <div class="contact_form">
+                        <div class="contact_info_title">Add New Category</div>
+                        <form asp-action="ManagePostCategory" class="comment_form" method="post">
+                            <div>
+                                <div class="form_title">Name</div>
+                                <input type="text" class="comment_input" asp-for="Name" required="required">
+                            </div>
+                            <div>
+                                <div class="form_title">Status</div>
+                                <select asp-items="Html.GetEnumSelectList<Status>()" aria-hidden="true">
+
+                                </select>
+                            </div>
+                            <div>
+                                <button type="submit" class="comment_button trans_200"><i class="fa fa-save"></i> Save now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- category table -->
+                <div class="col-lg-6">
+                    <div class="contact_info">
+                        <div class="contact_info_title">List of Categories</div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Theme/js/contact.min.js"></script>
+}
+

@@ -13,10 +13,6 @@ using SMET.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SMET.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using System.Data.SqlClient;
-using SMET.Helpers;
 
 namespace SMET
 {

@@ -14,8 +14,11 @@ namespace SMET.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
 
         public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<Post> Post { get; set; }
+        public virtual DbSet<PostCategory> PostCategory { get; set; }
     }
 }
