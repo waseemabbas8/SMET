@@ -52,5 +52,17 @@
     "inputFiles": [
       "wwwroot/lib/jquery-editable/jquery.jeditable.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/jquery-dropdown/jquery.sweet-dropdown.min.css",
+    "inputFiles": [
+      "wwwroot/lib/jquery-dropdown/jquery.sweet-dropdown.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/jquery-dropdown/jquery.sweet-dropdown.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery-dropdown/jquery.sweet-dropdown.js"
+    ]
   }
 ]

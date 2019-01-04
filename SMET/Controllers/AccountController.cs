@@ -78,7 +78,7 @@ namespace SMET.Controllers
             TempData.Put("user", lr);
             return RedirectToAction(nameof(RegisterOrLogin));
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
