@@ -1,5 +1,4 @@
 ﻿@model PostCategory
-@using SMET.Helpers
 
 @{
     ViewData["Title"] = "ManagePostCategory";
@@ -37,7 +36,7 @@
             <div class="row">
 
                 <!-- Category Form -->
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="contact_form">
                         <div class="contact_info_title">Add New Category</div>
                         <form asp-action="ManagePostCategory" class="comment_form" method="post">
@@ -47,7 +46,7 @@
                             </div>
                             <div>
                                 <div class="form_title">Status</div>
-                                <select asp-items="Html.GetEnumSelectList<Status>()" aria-hidden="true">
+                                <select asp-for="Status" asp-items="Html.GetEnumSelectList<Status>()" aria-hidden="true">
 
                                 </select>
                             </div>
@@ -59,9 +58,40 @@
                 </div>
 
                 <!-- category table -->
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="contact_info">
                         <div class="contact_info_title">List of Categories</div>
+                        <div class="contact_info_text">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">S.No</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        if (ViewBag.ListOfCategories != null)
+                                        {
+                                            List<PostCategory> postCategories = ViewBag.ListOfCategories as List<PostCategory>;
+                                            foreach (var postCategory in postCategories)
+                                            {
+                                                int sNo = 1;
+                                                <tr>
+                                                    <td scope="row">@sNo</td>
+                                                    <td scope="row">@postCategory.Name</td>
+                                                    <td scope="row">@postCategory.Status</td>
+                                                    <td scope="row"><a href="#" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> EDIT</a></td>
+                                                </tr>
+                                                sNo++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                         
                     </div>
                 </div>

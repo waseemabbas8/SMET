@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SMET</title>
 
-
     <link rel="stylesheet" type="text/css" href="~/Theme/styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/Theme/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/Theme/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -143,11 +142,11 @@
                                     <div class="footer_section footer_about">
                                         <div class="footer_logo_container">
                                             <a href="#">
-                                                <div class="footer_logo_text">Unic<span>at</span></div>
+                                                <div class="footer_logo_text">SME<span>T</span></div>
                                             </a>
                                         </div>
                                         <div class="footer_about_text">
-                                            <p>Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</p>
+                                            <p>@AppConstants.ORG_FULL_NAME</p>
                                         </div>
                                         <div class="footer_social">
                                             <ul>
@@ -168,9 +167,9 @@
                                         <div class="footer_title">Contact Us</div>
                                         <div class="footer_contact_info">
                                             <ul>
-                                                <li>Email: Info.deercreative@gmail.com</li>
-                                                <li>Phone:  +(88) 111 555 666</li>
-                                                <li>40 Baria Sreet 133/2 New York City, United States</li>
+                                                <li>Email: @AppConstants.CONTACT_EMAIL</li>
+                                                <li>Phone:  @AppConstants.CONTACT_PHONE</li>
+                                                <li>@AppConstants.ORG_ADDRESS</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -184,9 +183,9 @@
                                         <div class="footer_title">Contact Us</div>
                                         <div class="footer_links_container">
                                             <ul>
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about.html">About</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
+                                                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                                <li><a asp-controller="Home" asp-action="About">About</a></li>
+                                                <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
                                                 <li><a href="#">Features</a></li>
                                                 <li><a href="courses.html">Courses</a></li>
                                                 <li><a href="#">Events</a></li>
@@ -222,7 +221,7 @@
                             <div class="cr_text">
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | by @AppConstants.ORG_SHORT_NAME
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </div>
                             <div class="ml-lg-auto cr_links">

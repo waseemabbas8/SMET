@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SMET.Data;
 using SMET.Models;
@@ -46,6 +47,7 @@ namespace SMET.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult ManagePostCategory()
         {
+            ViewBag.ListOfCategories = db.PostCategory.ToList<PostCategory>();
             return View();
         }
 
@@ -55,10 +57,13 @@ namespace SMET.Controllers
         {
             if (ModelState.IsValid)
             {
+                postCategory.CreatedDate = DateTime.Now;
+                //ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
+                //postCategory.CreatedBy = user.UserName;
                 await db.PostCategory.AddAsync(postCategory);
                 await db.SaveChangesAsync();
                 ModelState.Clear();
-                return View();
+                RedirectToAction(nameof(ManagePostCategory));
             }
             return View(postCategory);
         }

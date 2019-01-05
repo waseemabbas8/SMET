@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SMET.Data;
 
 namespace SMET.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190104065540_CategoryMig")]
+    partial class CategoryMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,8 +247,8 @@ namespace SMET.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int?>("Status")
-                        .IsRequired();
+                    b.Property<string>("Status")
+                        .HasMaxLength(10);
 
                     b.HasKey("Id");
 
