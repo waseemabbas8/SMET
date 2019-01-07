@@ -6,6 +6,7 @@
 }
 
 @section Styles{
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/Theme/styles/contact.min.css" rel="stylesheet" />
     <link href="~/Theme/styles/contact_responsive.min.css" rel="stylesheet" />
 }
@@ -28,11 +29,28 @@
     </div>
 </div>
 
+
 <div class="contact">
 
     <!-- Contact Info -->
     <div class="contact_info_container">
         <div class="container">
+
+            @if (ViewBag.MessageSuccess != null)
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <i class="fa fa-check-circle fa-lg"></i><strong> @ViewBag.MessageSuccess</strong>
+                </div>
+            }
+            else if (ViewBag.MessageError != null)
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <i class="fa fa-exclamation-triangle fa-lg"></i><strong> @ViewBag.MessageError</strong>
+                </div>
+            }
+
             <div class="row">
 
                 <!-- Category Form -->
@@ -46,9 +64,7 @@
                             </div>
                             <div>
                                 <div class="form_title">Status</div>
-                                <select asp-for="Status" asp-items="Html.GetEnumSelectList<Status>()" aria-hidden="true">
-
-                                </select>
+                                <select asp-for="Status" asp-items="Html.GetEnumSelectList<Status>()" aria-hidden="true"></select>
                             </div>
                             <div>
                                 <button type="submit" class="comment_button trans_200"><i class="fa fa-save"></i> Save now</button>
@@ -62,7 +78,7 @@
                     <div class="contact_info">
                         <div class="contact_info_title">List of Categories</div>
                         <div class="contact_info_text">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="catg-table">
                                 <thead>
                                     <tr>
                                         <th scope="col">S.No</th>
@@ -75,15 +91,16 @@
                                     @{
                                         if (ViewBag.ListOfCategories != null)
                                         {
+                                            int sNo = 1;
                                             List<PostCategory> postCategories = ViewBag.ListOfCategories as List<PostCategory>;
                                             foreach (var postCategory in postCategories)
                                             {
-                                                int sNo = 1;
+
                                                 <tr>
                                                     <td scope="row">@sNo</td>
                                                     <td scope="row">@postCategory.Name</td>
-                                                    <td scope="row">@postCategory.Status</td>
-                                                    <td scope="row"><a href="#" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> EDIT</a></td>
+                                                    <td scope="row"><span class="badge badge-success">@((Status)postCategory.Status)</span></td>
+                                                    <td scope="row"><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> EDIT</a></td>
                                                 </tr>
                                                 sNo++;
                                             }
@@ -92,7 +109,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -103,5 +120,14 @@
 
 @section Scripts{
     <script src="~/Theme/js/contact.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    
+    <script>
+        $(function () {
+            $('#catg-table').DataTable();
+        })
+    </script>
+
 }
 

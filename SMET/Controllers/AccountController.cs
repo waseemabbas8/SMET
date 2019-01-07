@@ -79,8 +79,7 @@ namespace SMET.Controllers
             return RedirectToAction(nameof(RegisterOrLogin));
         }
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();

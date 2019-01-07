@@ -4,5 +4,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CreateUpdatePost</h2>
+@section Styles{
+    <link href="~/Theme/styles/contact.min.css" rel="stylesheet" />
+    <link href="~/Theme/styles/contact_responsive.min.css" rel="stylesheet" />
+}
+
+<!-- Home -->
+<div class="home">
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a asp-controller="Post" asp-action="Dashboard">Admin</a></li>
+                            <li>Manage Post</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Theme/js/contact.min.js"></script>
+}
 

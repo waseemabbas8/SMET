@@ -22,5 +22,9 @@ namespace SMET.Helpers
 
         public const string URL_FACEBOOK = "";
         public const string URL_GOOGLE = "";
+
+
+        public const string MSG_SAVED_SUCCESS = "Data saved Succefully!";
+        public const string MSG_SAVE_ERROR = "Some Error Occoured while saving data.";
     }
 }

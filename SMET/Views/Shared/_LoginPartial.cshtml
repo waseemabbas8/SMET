@@ -11,7 +11,7 @@ else
 {
     <div class="login_button"><a asp-controller="Account" asp-action="RegisterOrLogin">Register or Login</a></div>
 }
-    <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor dark" id="dark" style="padding-top:0px; padding-bottom:0px;">
+    <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dark" style="padding-top:0px; padding-bottom:0px; margin-top:0">
         <ul>
             <li><a asp-controller="Account" asp-action="UserProfile"><i class="fa fa-user"></i> Profile</a></li>
             <li class="divider"></li>
@@ -19,7 +19,7 @@ else
             {
                 <li><a asp-controller="Post" asp-action="Dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             }
-            @Html.AntiForgeryToken()
+            <li class="divider"></li>
             <li><a href="@Url.Action("Logout", "Account")"><i class="fa fa-sign-out"></i> Logout</a></li>
         </ul>
     </div>

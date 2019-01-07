@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SMET.Data;
+using SMET.Helpers;
 using SMET.Models;
 
 namespace SMET.Controllers
@@ -45,9 +46,15 @@ namespace SMET.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult ManagePostCategory()
+        public IActionResult ManagePostCategory(int? id)
         {
-            ViewBag.ListOfCategories = db.PostCategory.ToList<PostCategory>();
+            ViewBag.MessageSuccess = TempData["SuccessMessage"];
+            var oListPostCategory = db.PostCategory.ToList<PostCategory>();
+            ViewBag.ListOfCategories = oListPostCategory;
+            if (id.HasValue)
+            {
+                return View(oListPostCategory.Where(m => m.Id.Equals(id)).FirstOrDefault());
+            }
             return View();
         }
 
@@ -63,8 +70,10 @@ namespace SMET.Controllers
                 await db.PostCategory.AddAsync(postCategory);
                 await db.SaveChangesAsync();
                 ModelState.Clear();
-                RedirectToAction(nameof(ManagePostCategory));
+                TempData["SuccessMessage"] = AppConstants.MSG_SAVED_SUCCESS;
+                return RedirectToAction(nameof(ManagePostCategory));
             }
+            ViewBag.MessageError = AppConstants.MSG_SAVE_ERROR;
             return View(postCategory);
         }
     }
