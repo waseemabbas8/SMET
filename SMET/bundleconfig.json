@@ -64,5 +64,11 @@
     "inputFiles": [
       "wwwroot/lib/jquery-dropdown/jquery.sweet-dropdown.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+    ]
   }
 ]

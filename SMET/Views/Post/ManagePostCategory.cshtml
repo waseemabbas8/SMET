@@ -60,6 +60,7 @@
                         <form asp-action="ManagePostCategory" class="comment_form" method="post">
                             <div>
                                 <div class="form_title">Name</div>
+                                <span class="text-danger" asp-validation-for="Name"></span>
                                 <input type="text" class="comment_input" asp-for="Name" required="required">
                             </div>
                             <div>

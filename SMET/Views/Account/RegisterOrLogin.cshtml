@@ -14,6 +14,7 @@
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
 
     <link href="~/css/login.css" rel="stylesheet" />
+
 }
 
 <!-- Home -->
@@ -50,7 +51,9 @@
                 <h2>Login to your account</h2>
                 @Html.AntiForgeryToken()
                 <form asp-controller="Account" asp-action="Login" method="post">
+                    <span class="text-danger" asp-validation-for="LoginViewModel.Email"></span>
                     <input type="email" asp-for="LoginViewModel.Email" placeholder="Username" />
+                    <span class="text-danger" asp-validation-for="LoginViewModel.Password"></span>
                     <input type="password" asp-for="LoginViewModel.Password" placeholder="Password" />
                     <button>Login</button>
                 </form>
@@ -59,9 +62,13 @@
                 <h2>Create an account</h2>
                 @Html.AntiForgeryToken()
                 <form asp-controller="Account" asp-action="Register" method="post">
+                    <span class="text-danger" asp-validation-for="RegisterViewModel.Email"></span>
                     <input type="email" asp-for="RegisterViewModel.Email" placeholder="Email" required />
+                    <span class="text-danger" asp-validation-for="RegisterViewModel.Phone"></span>
                     <input type="text" asp-for="RegisterViewModel.Phone" placeholder="Phone" required />
+                    <span class="text-danger" asp-validation-for="RegisterViewModel.Password"></span>
                     <input type="password" asp-for="RegisterViewModel.Password" placeholder="Password" required />
+                    <span class="text-danger" asp-validation-for="RegisterViewModel.ConfirmPassword"></span>
                     <input type="password" asp-for="RegisterViewModel.ConfirmPassword" placeholder="Confirm Password" />
                     <select asp-for="RegisterViewModel.Role">
                         <option>Student</option>
