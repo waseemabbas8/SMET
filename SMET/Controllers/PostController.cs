@@ -39,10 +39,23 @@ namespace SMET.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Teacher")]
         public async Task<IActionResult> CreateUpdatePost(Post post)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                post.CreatedDate = DateTime.Now;
+                //ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
+                //postCategory.CreatedBy = user.UserName;
+                await db.Post.AddAsync(post);
+                await db.SaveChangesAsync();
+                ModelState.Clear();
+                TempData["SuccessMessage"] = AppConstants.MSG_SAVED_SUCCESS;
+                return RedirectToAction(nameof(CreateUpdatePost));
+            }
+            ViewBag.MessageError = AppConstants.MSG_SAVE_ERROR;
+            return View(post);
         }
 
         [Authorize(Roles = "Admin")]
@@ -76,5 +89,6 @@ namespace SMET.Controllers
             ViewBag.MessageError = AppConstants.MSG_SAVE_ERROR;
             return View(postCategory);
         }
+        
     }
 }

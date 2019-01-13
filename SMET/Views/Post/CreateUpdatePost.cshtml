@@ -1,4 +1,5 @@
-﻿
+﻿@model Post
+
 @{
     ViewData["Title"] = "CreateUpdatePost";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,7 +29,76 @@
 </div>
 
 
+<div class="contact">
+
+    <!-- Contact Info -->
+    <div class="contact_info_container">
+        <div class="container">
+
+            @if (ViewBag.MessageSuccess != null)
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <i class="fa fa-check-circle fa-lg"></i><strong> @ViewBag.MessageSuccess</strong>
+                </div>
+            }
+            else if (ViewBag.MessageError != null)
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <i class="fa fa-exclamation-triangle fa-lg"></i><strong> @ViewBag.MessageError</strong>
+                </div>
+            }
+
+            <!-- Create Post Form -->
+            <div>
+                <div class="contact_form">
+                    <div class="contact_info_title">Create New Post</div>
+                    @Html.AntiForgeryToken()
+                    <form asp-action="CreateUpdatePost" class="comment_form" method="post">
+                        <div>
+                            <div class="form_title">Title</div>
+                            <span class="text-danger" asp-validation-for="Title"></span>
+                            <input type="text" class="comment_input" asp-for="Title" required>
+                        </div>
+                        <div>
+                            <div class="form_title">Short Description</div>
+                            <span class="text-danger" asp-validation-for="ShortDescription"></span>
+                            <input type="text" class="comment_input" asp-for="ShortDescription" required>
+                        </div>
+                        <div>
+                            <div class="form_title">Long Description</div>
+                            <textarea id="editor" asp-for="LongDescription"></textarea>
+                        </div>
+                        <div>
+                            <div class="form_title">Title</div>
+                            <span class="text-danger" asp-validation-for="FeaturedImage"></span>
+                            <input type="text" class="comment_input" asp-for="FeaturedImage" required>
+                        </div>
+                        <div>
+                            <div class="form_title">Status</div>
+                            <select asp-for="Status" asp-items="Html.GetEnumSelectList<Status>()" aria-hidden="true"></select>
+                        </div>
+                        <div>
+                            <button type="submit" class="comment_button trans_200"><i class="fa fa-save"></i> Save Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts{
     <script src="~/Theme/js/contact.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 }
 
