@@ -35,6 +35,7 @@ namespace SMET.Controllers
         [Authorize(Roles = "Admin,Teacher")]
         public IActionResult CreateUpdatePost()
         {
+            ViewBag.ListOfCategories = db.PostCategory.ToList<PostCategory>();
             return View();
         }
 

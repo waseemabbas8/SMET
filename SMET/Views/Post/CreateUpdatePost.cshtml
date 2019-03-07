@@ -57,7 +57,7 @@
                     @Html.AntiForgeryToken()
                     <form asp-action="CreateUpdatePost" class="comment_form" method="post">
                         <div>
-                            <div class="form_title">Title</div>
+                            <div class="form_title">Title <small>(This is the headline of the post)</small></div>
                             <span class="text-danger" asp-validation-for="Title"></span>
                             <input type="text" class="comment_input" asp-for="Title" required>
                         </div>
@@ -71,9 +71,17 @@
                             <textarea id="editor" asp-for="LongDescription"></textarea>
                         </div>
                         <div>
-                            <div class="form_title">Title</div>
-                            <span class="text-danger" asp-validation-for="FeaturedImage"></span>
-                            <input type="text" class="comment_input" asp-for="FeaturedImage" required>
+                            <div class="form_title">Featured Image <small>(Upload an image of 690x476. This will be shown on post link)</small></div>
+                            <div>
+                                <img src="@(Model!=null && !string.IsNullOrEmpty(Model.FeaturedImage)?"/CustomerImages/"+@Model.FeaturedImage:"/Theme/images/blog_3.jpg")" id="ProfileImg" style="width:345px; height:249.5px" alt="">
+                                <input name="Profile" type="file" id="Profile" style="display:none;" accept=".jpg,.jpeg,.png,.gif" />
+                                <input asp-for="FeaturedImage" type="hidden" />
+                                <a onclick="return uploadimage();" href="" class="fa fa-camera"></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form_title">Post Category</div>
+                            <select asp-for="CategoryId" asp-items="@(new SelectList(@ViewBag.ListOfCategories,"Id","Name"))" aria-hidden="true"></select>
                         </div>
                         <div>
                             <div class="form_title">Status</div>
@@ -94,11 +102,24 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 
     <script>
+        // image uploading fun
+        function uploadimage() {
+            $("#Profile").trigger('click');
+            $("#Profile").change(function () {
+                $("#ProfileImg").fadeIn("fast").attr('src', URL.createObjectURL(event.target.files[0]));
+                //$(".imgtext").text("Change")
+            });
+            return false;
+        }
+    </script>
+
+    <script>
         ClassicEditor
             .create(document.querySelector('#editor'))
             .catch(error => {
                 console.error(error);
             });
     </script>
+
 }
 
