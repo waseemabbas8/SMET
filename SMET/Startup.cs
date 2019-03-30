@@ -107,7 +107,7 @@ namespace SMET
             }
             //Assign Admin role to the main User here we have given our newly registered 
             //login id for Admin management
-            ApplicationUser user = await UserManager.FindByEmailAsync("fakhar@gmail.com");
+            ApplicationUser user = await UserManager.FindByEmailAsync("waseem@smet.com");
 
             await UserManager.AddToRoleAsync(user, "Admin");
         }

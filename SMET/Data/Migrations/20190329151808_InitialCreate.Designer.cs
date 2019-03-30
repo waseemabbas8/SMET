@@ -10,8 +10,8 @@ using SMET.Data;
 namespace SMET.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190104070334_PostCatgoryMig2")]
-    partial class PostCatgoryMig2
+    [Migration("20190329151808_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
